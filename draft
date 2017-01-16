@@ -1,0 +1,284 @@
+console.clear();
+//
+(function($){'use strict';
+ function at(a,b,c){function g(a){const e=a,h=g,t=e.currentTarget;t.removeEventListener(e.type,h);h.f(t,e);}const e=a,s=b;g.f=c;e.removeEventListener(s,g);e.addEventListener(s,g);}
+ at($,'load',function($){
+		function dataUri(a,b='utf-8',c=''){return 'data:'+a+';charset='+b+','+c;}
+
+		function XHR(a,b){const o=new w.XMLHttpRequest;o.open(a,b,true);return o;}
+		function getFileAsText(a,b,c=null){const o=XHR('GET',a);o.onload=b;o.send(c);}
+
+		function isEmpty(a){const e=a;return e===null||e.length===0||rgx.blank.test(e);}
+		function isEmptyAfterStripMultilineComment(a){return isEmpty(a.replace(rgx.multilinecomment,''));}
+
+		function isEmptyAfterStripSingleAndMultilineComment(a){return isEmpty(a.replace(rgx.multilinecomment,''));}
+
+
+
+		function cleanText(a){const e=a,s=e.textContent_original=e.textContent;e.innerHTML='';return s;}
+		function cleanHref(a,b){const e=a,s=e.href,t=e.href_original=e.getAttribute('href');e.href=b;return s;}
+
+
+
+		function testHref(s,e,i,r){
+				function f(a){const e=a.currentTarget;e.remove();return e;}
+				if(isEmpty(s)){
+						e.ignore=1;//→href:blank
+				}else{
+						const x=d;
+						let o=x.createElement('link');
+						o.rel='preload';
+						o.as=i;
+						o.originalnode=e;
+						o.onerror=function(a){f(a).originalnode.ignore=2;};//→href:broken
+						o.onload=function(a){const e=f(a);getFileAsText(e.href,function(a){if(r(a.currentTarget.responseText)){e.originalnode.ignore=3;};});};//→file:empty
+						o.href=s;
+						x.head.appendChild(o);
+				};
+		}
+
+
+
+
+		let f,e=null;
+		const w=$,O=w.Object,Seal=O.seal,Create=O.create,Keys=O.keys,//setProto=O.setPrototypeOf,
+		aBindedCall=(f=w.Function.prototype).bind.bind(f.call),
+		aRawObj=f=aBindedCall(Create,e,e),
+		rgx=Seal(f({
+			blank:{value:/^\s*?$/},
+			multilinecomment:{value:/\/\*[^*]*\*+([^\/*][^*]*\*+)*\//g},
+		})),
+		d=w.document, dE=d.documentElement,
+		itera=d.createNodeIterator(d.createDocumentFragment().appendChild(dE.cloneNode(true)),1,null),
+		tags=f({found:{value:f()}});
+		f=null;
+		//
+		while((e=itera.nextNode())!==null){
+			const o=tags.found;
+			let p=e.tagName,f=isEmptyAfterStripMultilineComment;
+			if(p==='LINK'){
+				if(e.hasAttribute('rel') && e.rel==='stylesheet'){testHref(cleanHref(e),dataUri('text/css'),e,'style',f);};
+			}else if(p==='STYLE'){
+				if(f(cleanText(e))){e.ignore=3;};//→file:empty
+			}else if(p==='SCRIPT'){
+				f=isEmptyAfterStripSingleAndMultilineComment;
+				if(e.hasAttribute('href')){
+					testHref(cleanHref(e),dataUri('text/javascript'),e,'script',f);
+				}else{
+					if(f(cleanText(e))){e.ignore=3;};//→file:empty
+				};
+			};
+			if(p in o){let m=o[p];m[m.length]=e;	}else{o[p]=[e];};
+		};
+		//
+		d.replaceChild(itera.root,dE);
+
+		console.dir(tags.found);
+		//tags.found.each();
+
+ });
+})(window);
+//END!
+
+
+
+
+
+
+
+
+
+
+//(e={block:{value:f({empty:{value:[]}})},linked:{value:f({empty:{value:[]},href:{value:f({none:{value:[]},broken:{value:[]}})}})}},
+//invalid:{value:f({style:{value:f(e)},script:{value:f(e)}})},
+//keys:{get:function(){return Keys(this);}},
+//each:{value:function(c){const o=this,f=c;for(let p in o){f(o[p],p,o)};}}
+
+
+
+
+
+
+/*
+
+						if(){}else{}
+
+	at(w2,'beforeunload',function($){
+
+at(w2,'load',function($){alert('$2')});
+
+});
+	at(w.open(w.location.href),'DOMContentLoaded',function($){
+		alert(555);
+	});
+
+	w2.onfocus=function($){
+		
+	};w2.focus();
+console.dir(tags);
+
+ d2=w2.document
+	d.replaceChild(itera.root,d.documentElement);
+	w2.stop();
+
+//console.info()
+//console.dir(o)
+
+*/
+
+
+
+		//console.dir(itera.root);
+		//e=Seal(tags);console.dir(e);
+		//opened
+		//w2
+
+
+	
+ 
+/* 'data:text/html;charset=utf-8,'
+console.log([].includes(p))
+ if(){}else{};
+ const w=window, d=w.document, dE=d.documentElement, frag=d.createDocumentFragment();
+
+
+		tags=aRawObj({
+	  permitted:{value:aRawObj({
+	onlyone:{value:aRawObj()},
+	morethanone:{value:aRawObj()}
+		})}});
+		const OnlyOne='HTML|HEAD|TITLE|BASE|BODY'
+
+
+   const expected=tags.permitted;
+	  let n=e.parentElement, o=expected.onlyone, p=e.tagName;
+		if(n!==null){
+	n=n.tagName;
+	if(n!=='HTML'){
+		o=expected.morethanone;
+	}else{//→ head|body
+	 if(p!=='HEAD'){//:body
+	 }else{//:head	
+		};
+	};
+		};
+
+
+
+
+
+javascript Check if file exists
+tagName
+:
+"HTML"
+
+ for(let e,i=0,m=frag.querySelectorAll('script'),l=m.length;i<l;++i){
+		e=m[i];
+		console.dir(e);
+ };
+
+
+		//console.log(e.outerHTML);
+		//console.log(e.readystate);
+
+
+ for(let e,v,o=scripts,i=0,m=frag.querySelectorAll('script'),l=m.length;i<l;++i){
+ (v=o[(e=m[i]).hasAttribute('src'))?'linked':'block'])[v.length]=e;
+ };
+
+ console.dir(scripts);
+ console.dir(frag.children[0].outerHTML);
+
+
+
+
+for(const e of frag.querySelectorAll('script')){
+e.originalsource=e.getAttribute('src');e.src='';
+};
+
+for(const e of frag.querySelectorAll('style')){e.originalrules=e.innerHTML;e.innerHTML='';};
+
+
+
+console.dir(frag);
+console.dir(e);
+console.log(e.outerHTML);
+*/
+
+/*
+O=w.Object,
+Seal=O.seal,
+Create=O.create,
+FP=w.Function.prototype,
+aBindedCall=FP.bind.bind(FP.call),
+aRawObj=aBindedCall(Create,null,null)
+*/
+
+/*
+
+document.querySelectorAll(css_selector) returns a non-live object.
+
+var elements = document.querySelectorAll("div"),
+    callback = (el) => { console.log(el); };
+
+// Spread operator
+[...elements].forEach(callback);
+
+// Array.from()
+Array.from(elements).forEach(callback);
+
+// for...of statement
+for (var div of elements) callback(div);
+ @bendc
+Owner
+bendc commented on 13 Jan 2015
+Unsurprisingly, for...of is approximately twice as fast as the two other approaches.
+
+var divs = document.querySelectorAll('div'), i;
+
+for (i = 0; i < divs.length; ++i) {
+  divs[i].style.color = "green";
+}
+
+for (var div of divs) {
+  div.style.color = "blue";
+}
+
+.parentNode.removeChild
+
+e=d.doctype;
+d.write(e===null?'<!DOCTYPE html>':new XMLSerializer().serializeToString(e));
+
+document.implementation.createDocumentType
+
+
+function createDocument(html, title) {
+  var doc = document.implementation.createHTMLDocument(title)
+  doc.documentElement.innerHTML = html
+  return doc
+}
+use as:
+
+var doc = createDocument('<!DOCTYPE html><html>'
+    + '<head><script src="foo.js"></script></head>'
+    + '<body></body></html>', 'test')
+console.log(doc.getElementsByTagName('script'))
+
+
+
+Document.prototype.implementation.createXHTMLDocument = function (doctype) {
+	var doc = this.implementation.createDocument(
+		  "http://www.w3.org/1999/xhtml"
+		, "html"
+		// Default to HTML5 doctype
+		, doctype || this.implementation.createDocumentType("html", null, null)
+	);
+	doc.documentElement.appendChild(doc.createElement("head"));
+	doc.documentElement.appendChild(doc.createElement("body"));
+	return doc;
+};
+
+var parser = new DOMParser();
+var doc = parser.parseFromString("<html_string>", "text/html");
+
+*/
